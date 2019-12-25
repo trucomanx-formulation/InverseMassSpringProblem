@@ -1,4 +1,4 @@
-\documentclass[review]{elsarticle}
+\documentclass[11pt,twoside,a4paper]{article}
 \usepackage{comment}
 \usepackage{url}
 %
@@ -8,12 +8,12 @@
 
 \usepackage[ruled]{algorithm2e}
 
-\usepackage{blkarray}
+
 
 %\usepackage{lineno}
 %\modulolinenumbers[5]
 
-\journal{Optics Communications}
+%\journal{Optics Communications}
 
 %%%%%%%%%%%%%%%%%%%%%%%
 %% Elsevier bibliography styles
@@ -44,7 +44,7 @@
 %\usepackage{numcompress}\bibliographystyle{model6-num-names}
 
 %% `Elsevier LaTeX' style
-\bibliographystyle{elsarticle-num}
+%\bibliographystyle{elsarticle-num}
 %%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[]{graphicx}
 
@@ -55,24 +55,37 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{blkarray}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- 
+\newcommand{\MATRIX}[1]{\mathbf{\uppercase{#1}}}
+\newcommand{\VECTOR}[1]{\mathbf{\lowercase{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
+\titleformat{\subsection}
+  {\normalfont\Large\bfseries}{\thesubsection}{1em}{}[]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[a4paper,bindingoffset=0.5cm,%
+            left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,%
+            footskip=0.625cm]{geometry}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document} 
-
-\begin{frontmatter}
-
 \title{Relation Between the Mass-Spring System and the Dynamic Speckle}
 %\tnotetext[mytitlenote]{Fully documented templates are available in the 
 %elsarticle package on \href{http://www.ctan.org/tex-archive/macros/latex/contrib/elsarticle}{CTAN}.}
 
-
-
 % Group authors per affiliation:
 \author{-------- ------- ------}
 \author{-------- ------- ------}
-
-
 
 % \author{Fernando Pujaico Rivera\fnref{myfootnote2}}
 % \author{Roberto Alves Braga Jr.\fnref{myfootnote1}}
@@ -80,21 +93,17 @@
 % \fntext[myfootnote2]{201518201@posgrad.ufla.br}
 % \fntext[myfootnote1]{robertobraga@deg.ufla.br }
 
+%\begin{abstract}
+%In this article will be studied the relation between the mass-spring system and the dynamic speckle.
+%\end{abstract}
 
-\begin{abstract}
-In this article will be studied the relation between the mass-spring system and the dynamic speckle.
-\end{abstract}
+%\begin{keyword}
+%Biospeckle laser \sep 
+%Biospeckle signal\sep 
+%Dynamic speckle \sep  
+%\end{keyword}
 
-\begin{keyword}
-Biospeckle laser \sep 
-Biospeckle signal\sep 
-Dynamic speckle \sep  
-\end{keyword}
-
-\end{frontmatter}
-
-\linenumbers
-
+\maketitle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
@@ -104,17 +113,8 @@ biological activity.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{System description}
-The Fig. \ref{fig:system2}.a) represents the signal $z$ with samples $z(n)$, 
-obtained  in a pixel of a dynamic speckle analysis,
-where $E[z]$ indicates the mean value of $z$. 
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=0.55\columnwidth]{images/system-mass-spring-2.eps}
-\caption{Data acquisition system setup of the coffee seed.  }
-\label{fig:system2}
-\end{figure}
-Be other side the 
-Fig. \ref{fig:system2}.b) represents the signal $x_M$ with samples $x_{M}(n)$, 
+The signal $y$ with samples $y(n)$, 
+represent the adquisition of the signal $x_M$ with samples $x_{M}(n)$, 
 obtained  in a mass-spring system of $M$ elements, where each mass
 is separated of another by a distance of $L/M$, like can be seen in the
 Fig. \ref{fig:system}.
@@ -124,15 +124,13 @@ Fig. \ref{fig:system}.
 \caption{Data acquisition system setup of the coffee seed.  }
 \label{fig:system}
 \end{figure}
+
 Thus, in this system the mass are denoted as $m_i$, the springs as $k_i$ and the
 displacements of each mass by $x_i$, for all $1 \leq  i\leq M$.
 
 The objective of this work it is to solve the next inverse problem: Known $y(n)$, 
-\begin{equation}\label{eq:yn}
- y(n)=z(n)-E[z]
-\end{equation} 
-and assuming
-$M$ elements with $m_i=m=1/L$; what values of $k_i$ generate a signal $x_M$ that minimize $E$, 
+and assuming $M$ elements with $m_i=m=1/L$; 
+what values of $k_i$ generate a signal $x_M$ that minimize $E$, 
 where
 \begin{equation}\label{eq:inverseproblem}
  E=\frac{1}{2}\sum_{n} (y(n)-x_M(n))^2
@@ -145,11 +143,11 @@ Assuming a mass spring system like seen in the Fig. \ref{fig:system} with $m_i=m
 we can to get the system of Eq. (\ref{eq:massspring1}).
 
 \begin{equation}\label{eq:massspring1}
- m \mathbb{\ddot{X}} = -\mathbf{P} \mathbb{X},
+ m \VECTOR{\ddot{X}} = -\MATRIX{P} \VECTOR{X},
 \end{equation}
 where
 \begin{equation}\label{eq:X}
- \mathbb{X} = \left( 
+ \VECTOR{X} = \left( 
  \begin{matrix}
  x_1\\
  x_2\\ 
@@ -162,7 +160,7 @@ where
 \end{equation}
 and 
 \begin{equation}\label{eq:P}
- \mathbf{P}(\mathbf{K}) \equiv \mathbf{P} = \left( 
+ \MATRIX{P}(\VECTOR{k}) \equiv \MATRIX{P} = \left( 
  \begin{matrix}
  k_1+k_2 & -k_2    & 0       &  \hdots & 0           & 0  \\
  -k_2    & k_2+k_3 & -k_3    &  \hdots & 0           & 0  \\
@@ -173,7 +171,7 @@ and
  \end{matrix}
 \right),
 \end{equation}
-so that $\mathbf{P}$ is a function of $\mathbf{K}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)^{T}$.
+so that $\MATRIX{P}$ is a function of $\VECTOR{k}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)^{T}$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -181,73 +179,73 @@ so that $\mathbf{P}$ is a function of $\mathbf{K}=( k_1~ k_2~ k_3~ \hdots ~ k_{M
 Knowing the system shown in the Eq. (\ref{eq:massspring1}), we can solve It
 using the Eq. (\ref{eq:Xt}),
 \begin{equation}\label{eq:Xt}
- \mathbb{X}(t)= \mathbf{V}\left(\mathbf{D}_1 cos(\mathbf{w}t) + \mathbf{D}_2 sin(\mathbf{w}t) \right),
+ \VECTOR{X}(t)= \MATRIX{V}\left(\MATRIX{D}_1 cos(\mathbf{w}t) + \MATRIX{D}_2 sin(\mathbf{w}t) \right),
 \end{equation}
 or Eq. (\ref{eq:Xtalt})
 \begin{equation}\label{eq:Xtalt}
- \mathbb{X}(t)= \mathbf{V}\left( cos(\mathbf{W}t)\mathbf{d}_1 +  sin(\mathbf{W}t)\mathbf{d}_2 \right),
+ \VECTOR{X}(t)= \MATRIX{V}\left( cos(\MATRIX{W}t)\VECTOR{d}_1 +  sin(\MATRIX{W}t)\VECTOR{d}_2 \right),
 \end{equation}
-where, $\mathbf{V}=\left( e_1,e_2,\dots ,e_M\right)$ and 
+where, $\MATRIX{V}=\left(\VECTOR{e}_1,\VECTOR{e}_2, ..., \VECTOR{e}_M \right)$ and 
 $\mathbf{w}=\left( \sqrt{\lambda_1},\sqrt{\lambda_2},\dots ,\sqrt{\lambda_M}\right)^{T}$ 
 are a matrix and a column 
-vector conform using the eigenvectors $e_i$ and eigenvalues $\lambda_i$ of
-$\mathbf{P}/m$, being $\mathbf{W}$ a diagonal matrix conform with the elements of vector $\mathbf{w}$.
-By other side, $\mathbf{D}_1$ and $\mathbf{D}_2$ are two any constant diagonal matrices
-conform by the elements of column vectors $\mathbf{d}_1$ and $\mathbf{d}_2$ respectively.
-Thus, we now that $\dot{\mathbb{X}}(t)$ and $\ddot{\mathbb{X}}(t)$ are defined by the Eqs. (\ref{eq:dXt_dt})
+vector conform using the eigenvectors $\VECTOR{e}_i$ and eigenvalues $\lambda_i$ of
+$\MATRIX{P}/m$, being $\MATRIX{W}$ a diagonal matrix conform with the elements of vector $\mathbf{w}$.
+By other side, $\MATRIX{D}_1$ and $\MATRIX{D}_2$ are two any constant diagonal matrices
+conform by the elements of column vectors $\VECTOR{d}_1$ and $\VECTOR{d}_2$ respectively.
+Thus, we now that $\dot{\VECTOR{X}}(t)$ and $\ddot{\VECTOR{X}}(t)$ are defined by the Eqs. (\ref{eq:dXt_dt})
 and (\ref{eq:d2Xt_dt2}) respectively.
 \begin{equation}\label{eq:dXt_dt}
- \dot{\mathbb{X}}(t)= \mathbf{V}\left(-\mathbf{D}_1 \mathbf{W} sin(\mathbf{w}t) + \mathbf{D}_2 \mathbf{W} cos(\mathbf{w}t) \right),
+ \dot{\VECTOR{X}}(t)= \MATRIX{V}\left(-\MATRIX{D}_1 \MATRIX{W} sin(\mathbf{w}t) + \MATRIX{D}_2 \MATRIX{W} cos(\mathbf{w}t) \right),
 \end{equation}
 \begin{equation}\label{eq:d2Xt_dt2}
- \ddot{\mathbb{X}}(t)= -\mathbf{V}\left(\mathbf{D}_1 \mathbf{W}^2 cos(\mathbf{w}t) + \mathbf{D}_2 \mathbf{W}^2 sin(\mathbf{w}t) \right),
+ \ddot{\VECTOR{X}}(t)= -\MATRIX{V}\left(\MATRIX{D}_1 \MATRIX{W}^2 cos(\mathbf{w}t) + \MATRIX{D}_2 \MATRIX{W}^2 sin(\mathbf{w}t) \right),
 \end{equation}
-thus, It is fulfill that $\mathbf{W}^2=(V D_1)^{-1}(P/m)(V D_1)=(V D_2)^{-1}(P/m)( D_2)$.
+thus, It is fulfill that $\MATRIX{W}^2=(\MATRIX{V} \MATRIX{D}_1)^{-1}(\MATRIX{P}/m)(\MATRIX{V} \MATRIX{D}_1)=(\MATRIX{V} \MATRIX{D}_2)^{-1}(\MATRIX{P}/m)( \MATRIX{V} \MATRIX{D}_2)$.
 
 \subsubsection{Constant values from two points}
-Now, to get the constant values in the column vectors $\mathbf{d}_1$ and $\mathbf{d}_2$, we can
+Now, to get the constant values in the column vectors $\VECTOR{d}_1$ and $\VECTOR{d}_2$, we can
 use the Eq. (\ref{eq:d1d2})
 \begin{equation}\label{eq:d1d2}
   \left( 
  \begin{matrix}
-\mathbf{V}cos(\mathbf{W}t_1) & \mathbf{V}sin(\mathbf{W}t_1)\\
-\mathbf{V}cos(\mathbf{W}t_2) & \mathbf{V}sin(\mathbf{W}t_2)\\
+\MATRIX{V}cos(\MATRIX{W}t_1) & \MATRIX{V}sin(\MATRIX{W}t_1)\\
+\MATRIX{V}cos(\MATRIX{W}t_2) & \MATRIX{V}sin(\MATRIX{W}t_2)\\
  \end{matrix}
  \right)^{-1}
  \left( 
  \begin{matrix}
-\mathbb{X}(t_1) \\
-\mathbb{X}(t_2)
+\VECTOR{X}(t_1) \\
+\VECTOR{X}(t_2)
  \end{matrix}
  \right)=
   \left( 
  \begin{matrix}
-\mathbf{d}_1 \\
-\mathbf{d}_2
+\VECTOR{d}_1 \\
+\VECTOR{d}_2
  \end{matrix}
  \right)
 \end{equation}
 
 \subsubsection{Constant values from position and velocity of a point}
-Now, to get the constant values in the column vectors $\mathbf{d}_1$ and $\mathbf{d}_2$, we can
+Now, to get the constant values in the column vectors $\VECTOR{d}_1$ and $\VECTOR{d}_2$, we can
 use the Eq. (\ref{eq:d1d22})
 \begin{equation}\label{eq:d1d22}
   \left( 
  \begin{matrix}
-\mathbf{V}cos(\mathbf{W}t_1) & \mathbf{V}sin(\mathbf{W}t_1)\\
--\mathbf{V}\mathbf{W}sin(\mathbf{W}t_1) & \mathbf{V}\mathbf{W}cos(\mathbf{W}t_1)\\
+\MATRIX{V}cos(\MATRIX{W}t_1) & \MATRIX{V}sin(\MATRIX{W}t_1)\\
+-\MATRIX{V}\MATRIX{W}sin(\MATRIX{W}t_1) & \MATRIX{V}\MATRIX{W}cos(\MATRIX{W}t_1)\\
  \end{matrix}
  \right)^{-1}
  \left( 
  \begin{matrix}
-\mathbb{X}(t_1) \\
-\dot{\mathbb{X}}(t_1)
+\VECTOR{X}(t_1) \\
+\dot{\VECTOR{X}}(t_1)
  \end{matrix}
  \right)=
   \left( 
  \begin{matrix}
-\mathbf{d}_1 \\
-\mathbf{d}_2
+\VECTOR{d}_1 \\
+\VECTOR{d}_2
  \end{matrix}
  \right)
 \end{equation}
@@ -255,33 +253,34 @@ use the Eq. (\ref{eq:d1d22})
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Finite differences: Knowing two consecutive samples}
 \label{subsec:findiff1}
-Applying finite differences we known that $\mathbb{X} \equiv \mathbb{X}(n)$ and
-$\mathbb{\ddot{X}} \equiv$ $( \mathbb{X}(n+1)$ $-2\mathbb{X}(n)$ $+\mathbb{X}(n-1) ) /{\tau^2}$,
+Applying finite differences we known that $\VECTOR{X} \equiv \VECTOR{X}(n)$ and
+$\VECTOR{\ddot{X}} \equiv$ $( \VECTOR{X}(n+1)$ $-2\VECTOR{X}(n)$ $+\VECTOR{X}(n-1) ) /{\tau^2}$,
 so that the Eq. (\ref{eq:massspring1}) can be rewrite as
 \begin{equation}\label{eq:massspring2}
- \mathbb{X}(n) = \left(2 \mathbf{I} -\mathbf{P}\frac{\tau^2}{m}\right) \mathbb{X}(n-1)-\mathbb{X}(n-2),
+ \VECTOR{X}(n) = \left(2 \mathbf{I} -\MATRIX{P}\frac{\tau^2}{m}\right) \VECTOR{X}(n-1)-\VECTOR{X}(n-2),
 \end{equation}
-now deriving $\mathbb{X}(n)$ by the vector $\mathbf{K}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)$,
-so that $\mathbb{J}(n) \equiv \frac{\partial \mathbb{X}(n)}{\partial \mathbf{K}}$,
+now deriving $\VECTOR{X}(n)$ by the vector $\VECTOR{k}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)$,
+so that $\MATRIX{J}(n) \equiv \frac{\partial \VECTOR{X}(n)}{\partial \VECTOR{k}}$,
 we get the Eq.  (\ref{eq:massspring3})
 \begin{equation}\label{eq:massspring3}
- \mathbb{J}(n) = 
- -\frac{\tau^2}{m}\bigcup_{i}{ \left[ \frac{ \partial \mathbf{P} }{\partial k_{i}}  \mathbb{X}(n-1)\right] }
- +\left(2 \mathbf{I} -\mathbf{P}\frac{\tau^2}{m}\right) \mathbb{J}(n-1)
- -\mathbb{J}(n-2),
+ \MATRIX{J}(n) = 
+ -\frac{\tau^2}{m}\bigcup_{i}{ \left[ \frac{ \partial \MATRIX{P} }{\partial k_{i}}  \VECTOR{X}(n-1)\right] }
+ +\left(2 \mathbf{I} -\MATRIX{P}\frac{\tau^2}{m}\right) \MATRIX{J}(n-1)
+ -\MATRIX{J}(n-2),
 \end{equation}
 where 
 \begin{equation}\label{eq:dPdki}
- \frac{ \partial \mathbf{P}}{\partial k_{i}} = 
- \begin{blockarray}{ccccccc}
- ~       & ~       & i-th    & ~       & ~           & ~  & ~\\
- \begin{block}{(cccccc)c}
- 0       & 0       & 0       &  \hdots & 0           & 0  & ~\\
- 0       & 1       & -1      &  \hdots & 0           & 0  & ~\\
- 0       & -1      & 1       &  \hdots & 0           & 0  & i-th\\
- \vdots  & \vdots  & \vdots  &  \ddots & \vdots      & \vdots & ~\\
- 0       & 0       & 0       &  \hdots & 0           & 0  & ~\\
- 0       & 0       & 0       &  \hdots & 0           & 0  & ~\\
+ \frac{ \partial \MATRIX{P}}{\partial k_{i}} = 
+ \begin{blockarray}{cccccccc}
+ ~       &  ~       & ~       & i-th    & ~       & ~           & ~  & ~\\
+ \begin{block}{(ccccccc)c}
+ 0       &  \hdots & 0       & 0       &  \hdots & 0           & 0  & ~\\
+ \vdots  &  \hdots & \vdots  & \vdots  &  \hdots & \vdots      & \vdots & ~\\
+ 0       &  \hdots & 1       & -1      &  \hdots & 0           & 0  & ~\\
+ 0       &  \hdots & -1      & 1       &  \hdots & 0           & 0  & i-th\\
+ \vdots  &  \hdots & \vdots  & \vdots  &  \ddots & \vdots      & \vdots & ~\\
+ 0       &  \hdots & 0       & 0       &  \hdots & 0           & 0  & ~\\
+ 0       &  \hdots & 0       & 0       &  \hdots & 0           & 0  & ~\\
 \end{block}
 \end{blockarray}
 ,
@@ -290,48 +289,48 @@ where
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Finite differences: Knowing one sample and velocity}
-In this case, It is necessary define $\mathbb{\dot{X}} = \mathbb{V}$, so that
+In this case, It is necessary define $\VECTOR{\dot{X}} = \VECTOR{V}$, so that
 the Eq. (\ref{eq:massspring1}) can be rewrite as
 \begin{equation}\label{eq:massspringm2}
 \left(
 \begin{matrix}
- \mathbb{\dot{X}}\\
- \mathbb{\dot{V}}\\
+ \VECTOR{\dot{X}}\\
+ \VECTOR{\dot{V}}\\
 \end{matrix}\right)=
 \left(
 \begin{matrix}
- \mathbf{0}    & \mathbb{I}_{M \times M} \\
- -\mathbf{P}/m & \mathbf{0} \\
+ \mathbf{0}    & \MATRIX{I}_{M \times M} \\
+ -\MATRIX{P}/m & \mathbf{0} \\
 \end{matrix}\right)
 \left(
 \begin{matrix}
- \mathbb{X}\\
- \mathbb{V}\\
+ \VECTOR{X}\\
+ \VECTOR{V}\\
 \end{matrix}\right),
 \end{equation}
 so that we got
 \begin{equation}\label{eq:massspringm2a}
- \mathbb{\dot{U}}=A\mathbb{U},
+ \VECTOR{\dot{U}}=A\VECTOR{U},
 \end{equation}
-where $\mathbb{U}= \left( \mathbb{X} ; \mathbb{V} \right)$ and
-$A=\left( \mathbf{0} , \mathbb{I}_{M \times M} ; -\mathbf{P}/m , \mathbf{0} \right)$.
+where $\VECTOR{U}= \left( \VECTOR{X} ; \VECTOR{V} \right)$ and
+$A=\left( \mathbf{0} , \MATRIX{I}_{M \times M} ; -\MATRIX{P}/m , \mathbf{0} \right)$.
 
-Applying finite differences we known that $\mathbb{U} \equiv \mathbb{U}(n)$ and
-$\mathbb{\dot{U}} \equiv$ $( \mathbb{U}(n)$ $-\mathbb{U}(n-1)$ $ ) /{\tau_2}$, 
+Applying finite differences we known that $\VECTOR{U} \equiv \VECTOR{U}(n)$ and
+$\VECTOR{\dot{U}} \equiv$ $( \VECTOR{U}(n)$ $-\VECTOR{U}(n-1)$ $ ) /{\tau_2}$, 
 so that the Eq. (\ref{eq:massspringm2a}) can be rewrite as
 \begin{equation}\label{eq:massspring2m2}
- \mathbb{U}(n) = \left( \mathbf{I} -\mathbf{A}\tau_2 \right)^{-1} \mathbb{U}(n-1),
+ \VECTOR{U}(n) = \left( \mathbf{I} -\mathbf{A}\tau_2 \right)^{-1} \VECTOR{U}(n-1),
 \end{equation}
 \textcolor{red}{Problems  with finite differences: To got a good aproximation it 
 is necessary to choose $\tau_2 \gg \tau$ (where $\tau$ is the value used in the section \ref{subsec:findiff1}). Experimentaly was see that $\tau_2 \geq \tau^2$.}
 
-Now deriving $\mathbb{U}(n)$ by the vector $\mathbf{K}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)$,
-so that $\mathbb{Q}(n) \equiv \frac{\partial \mathbb{U}(n)}{\partial \mathbf{K}}$,
+Now deriving $\VECTOR{U}(n)$ by the vector $\VECTOR{k}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)$,
+so that $\MATRIX{Q}(n) \equiv \frac{\partial \VECTOR{U}(n)}{\partial \VECTOR{k}}$,
 we get the Eq.  (\ref{eq:massspring3m2})
 \begin{equation}\label{eq:massspring3m2}
- \mathbb{Q}(n) = 
-  \tau_2 \left( \mathbf{I} -\mathbf{A}\tau_2 \right)^{-1} \bigcup_{i}{ \left[ \frac{ \partial \mathbf{A} }{\partial k_{i}}  \mathbb{U}(n)\right] },
- +\left( \mathbf{I} -\mathbf{A}\tau_2 \right)^{-1} \mathbb{Q}(n-1),
+ \MATRIX{Q}(n) = 
+  \tau_2 \left( \mathbf{I} -\mathbf{A}\tau_2 \right)^{-1} \bigcup_{i}{ \left[ \frac{ \partial \mathbf{A} }{\partial k_{i}}  \VECTOR{U}(n)\right] },
+ +\left( \mathbf{I} -\mathbf{A}\tau_2 \right)^{-1} \MATRIX{Q}(n-1),
 \end{equation}
 where 
 \begin{equation}\label{eq:dPdkim2}
@@ -339,7 +338,7 @@ where
 \left(
 \begin{matrix}
  \mathbf{0}    & \mathbf{0}_{M \times M} \\
- -\frac{1}{m}\frac{ \partial\mathbf{P}}{\partial k_{i}} & \mathbf{0} \\
+ -\frac{1}{m}\frac{ \partial\MATRIX{P}}{\partial k_{i}} & \mathbf{0} \\
 \end{matrix}\right)
 ,
 
@@ -349,75 +348,75 @@ where
 \section{Minimization problem}
 The minimization problem seen in the Eq. (\ref{eq:inverseproblem}) can be rewrite as
 \begin{equation}\label{eq:minimization1}
- E(\mathbf{K})=\frac{1}{2}\sum_{n} \left( y(n)-\mathbf{B}^{T}\mathbb{X}(n,\mathbf{K}) \right)^2
+ E(\VECTOR{k})=\frac{1}{2}\sum_{n} \left( y(n)-\VECTOR{b}^{T}\VECTOR{X}(n,\VECTOR{k}) \right)^2
 \end{equation}
-where $\mathbf{B}=( 0~ 0~ 0~ \hdots ~ 0~ 1)^{T}$, $y(n)$ are known values and 
-$\mathbb{X}(n)$ that is a function of $\mathbf{K}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)^{T}$.
+where $\VECTOR{b}=( 0~ 0~ 0~ \hdots ~ 0~ 1)^{T}$, $y(n)$ are known values and 
+$\VECTOR{X}(n)$ that is a function of $\VECTOR{k}=( k_1~ k_2~ k_3~ \hdots ~ k_{M-1}~ k_M)^{T}$.
 
-Now, knowing that a minimum of $E(\mathbf{K})$ in $\mathbf{K}$ is found when 
-$\frac{\partial E(\mathbf{K})}{\partial k_i}=0$ for all integer $1 \leq i \leq M$; we calculate the
+Now, knowing that a minimum of $E(\VECTOR{k})$ in $\VECTOR{k}$ is found when 
+$\frac{\partial E(\VECTOR{k})}{\partial k_i}=0$ for all integer $1 \leq i \leq M$; we calculate the
 Eq. (\ref{eq:minimization1d}).
 \begin{equation}\label{eq:minimization1d}
- \frac{\partial E(\mathbf{K})}{\partial k_i}=\sum_{n}{\left( \mathbf{B}^{T}\frac{\partial \mathbb{X}(n,\mathbf{K})}{\partial k_i}\right)^{T} \left( \mathbf{B}^{T}\mathbb{X}(n,\mathbf{K}) -y(n)  \right) },
+ \frac{\partial E(\VECTOR{k})}{\partial k_i}=\sum_{n}{\left( \VECTOR{b}^{T}\frac{\partial \VECTOR{X}(n,\VECTOR{k})}{\partial k_i}\right)^{T} \left( \VECTOR{b}^{T}\VECTOR{X}(n,\VECTOR{k}) -y(n)  \right) },
 \end{equation}
 
 Now reordering the Eq. 
-(\ref{eq:minimization1d}) using a vectorial differentiation by $\mathbf{K}$, we get the 
+(\ref{eq:minimization1d}) using a vectorial differentiation by $\VECTOR{k}$, we get the 
 Eq. (\ref{eq:minimization2}).
 \begin{equation}\label{eq:minimization2}
- \frac{\partial E(\mathbf{K})}{\partial \mathbf{K}}=\sum_{n}{ \left( \mathbf{B}^{T}\mathbb{J}(n,\mathbf{K})\right)^{T} \left(\mathbf{B}^{T}\mathbb{X}(n,\mathbf{K}) -y(n) \right) },
+ \frac{\partial E(\VECTOR{k})}{\partial \VECTOR{k}}=\sum_{n}{ \left( \VECTOR{b}^{T}\MATRIX{J}(n,\VECTOR{k})\right)^{T} \left(\VECTOR{b}^{T}\VECTOR{X}(n,\VECTOR{k}) -y(n) \right) },
 \end{equation}
 
-where $\mathbb{J}(n)=\frac{\partial \mathbb{X}(n)}{\partial \mathbf{K}}$.
+where $\MATRIX{J}(n)=\frac{\partial \VECTOR{X}(n)}{\partial \VECTOR{k}}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Landweber iterative method}
 The Landweber iteration method propose that 
-the minimization of a nonlinear function $E(\mathbf{K})$ can be found using
+the minimization of a nonlinear function $E(\VECTOR{k})$ can be found using
 the gradient descent method, so that 
 
 \begin{equation}\label{eq:Landweber1}
-\mathbf{K}_{j}\leftarrow \mathbf{K}_{j-1} - \alpha \frac{\partial E(\mathbf{K}_{j-1})}{\partial \mathbf{K}}
+\VECTOR{k}_{j}\leftarrow \VECTOR{k}_{j-1} - \alpha \frac{\partial E(\VECTOR{k}_{j-1})}{\partial \VECTOR{k}}
 \end{equation}
-where $0 < \alpha < 2/||\frac{\partial E(\mathbf{K})}{\partial \mathbf{K}}||^2$ and
+where $0 < \alpha < 2/||\frac{\partial E(\VECTOR{k})}{\partial \VECTOR{k}}||^2$ and
 $\|\cdot \|$ is the spectral norm. Thus, following the Landweber iteration method
 and using the Eq. (\ref{eq:minimization2}) in
 our minimization problem, It can be solved using the Eq. (\ref{eq:Landweber2}).
 \begin{equation}\label{eq:Landweber2}
-\mathbf{K}_{j}\leftarrow \mathbf{K}_{j-1} 
-- \alpha \sum_{n}{ \left( \mathbf{B}^{T}\mathbb{J}(n,\mathbf{K}_{j-1})\right)^{T} \left(\mathbf{B}^{T}\mathbb{X}(n,\mathbf{K}_{j-1}) -y(n) \right) }
+\VECTOR{k}_{j}\leftarrow \VECTOR{k}_{j-1} 
+- \alpha \sum_{n}{ \left( \VECTOR{b}^{T}\MATRIX{J}(n,\VECTOR{k}_{j-1})\right)^{T} \left(\VECTOR{b}^{T}\VECTOR{X}(n,\VECTOR{k}_{j-1}) -y(n) \right) }
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Tikhonov iterative method}
 
-If we assume that the problem of to get $\mathbf{K}$ will be solved iteratively, 
-we can  rewrite the Eq. (\ref{eq:minimization2}) as if was evaluated by $\mathbb{X}_{j}(n)$
-and $\mathbb{J}_{j-1}(n)$, as in the Eq. (\ref{eq:miniterative}).
+If we assume that the problem of to get $\VECTOR{k}$ will be solved iteratively, 
+we can  rewrite the Eq. (\ref{eq:minimization2}) as if was evaluated by $\VECTOR{X}_{j}(n)$
+and $\MATRIX{J}_{j-1}(n)$, as in the Eq. (\ref{eq:miniterative}).
 \begin{equation}\label{eq:miniterative}
-\sum_{n}{\left\{ \left( \mathbf{B}^{T}\mathbb{J}_{j-1}(n)\right)^{T} \left(\mathbf{B}^{T}\mathbb{X}_{j}(n) - y(n)  \right) \right \}}=\mathbf{0}.
+\sum_{n}{\left\{ \left( \VECTOR{b}^{T}\MATRIX{J}_{j-1}(n)\right)^{T} \left(\VECTOR{b}^{T}\VECTOR{X}_{j}(n) - y(n)  \right) \right \}}=\mathbf{0}.
 \end{equation}
-Where $\mathbb{J}_{j-1}(n)=\mathbb{J}(n,\mathbf{K}_{j-1})$ and
-$\mathbb{X}_{j}(n)=\mathbb{X}(n,\mathbf{K}_{j-1})$.
+Where $\MATRIX{J}_{j-1}(n)=\MATRIX{J}(n,\VECTOR{k}_{j-1})$ and
+$\VECTOR{X}_{j}(n)=\VECTOR{X}(n,\VECTOR{k}_{j-1})$.
 
 Knowing by the Taylor theorem that 
-$\mathbb{X}_{j}(n) \approx \mathbb{X}_{j-1}(n) + \mathbb{J}_{j-1}(n)\left( \mathbf{K}_{j} - \mathbf{K}_{j-1}\right) $
+$\VECTOR{X}_{j}(n) \approx \VECTOR{X}_{j-1}(n) + \MATRIX{J}_{j-1}(n)\left( \VECTOR{k}_{j} - \VECTOR{k}_{j-1}\right) $
 
 \begin{equation}\label{eq:miniterative2}
-\mathbf{K}_{j} = \mathbf{K}_{j-1} +
-\left(\sum_{n}{ \left( \mathbf{B}^{T}\mathbb{J}_{j-1}(n)\right)^{T}\left(  \mathbf{B}^{T}\mathbb{J}_{j-1}(n) \right) }\right)^{-1} 
-\sum_{n}{ \left( \mathbf{B}^{T}\mathbb{J}_{j-1}(n)\right)^{T} \left(y(n) - \mathbf{B}^{T}\mathbb{X}_{j-1}(n) \right) }.
+\VECTOR{k}_{j} = \VECTOR{k}_{j-1} +
+\left(\sum_{n}{ \left( \VECTOR{b}^{T}\MATRIX{J}_{j-1}(n)\right)^{T}\left(  \VECTOR{b}^{T}\MATRIX{J}_{j-1}(n) \right) }\right)^{-1} 
+\sum_{n}{ \left( \VECTOR{b}^{T}\MATRIX{J}_{j-1}(n)\right)^{T} \left(y(n) - \VECTOR{b}^{T}\VECTOR{X}_{j-1}(n) \right) }.
 \end{equation}
 
 joint with the Eqs. (\ref{eq:massspring2}) and (\ref{eq:massspring3}) we got:
 \begin{equation}\label{eq:massspring2b}
- \mathbb{X}(n,\mathbf{K}) = \left(2 \mathbf{I} -\mathbf{P(\mathbf{K})}\frac{\tau^2}{m}\right) \mathbb{X}(n-1,\mathbf{K})-\mathbb{X}(n-2,\mathbf{K}),
+ \VECTOR{X}(n,\VECTOR{k}) = \left(2 \mathbf{I} -\mathbf{P(\VECTOR{k})}\frac{\tau^2}{m}\right) \VECTOR{X}(n-1,\VECTOR{k})-\VECTOR{X}(n-2,\VECTOR{k}),
 \end{equation}
 
 \begin{equation}\label{eq:massspring3b}
- \mathbb{J}(n,\mathbf{K}) = 
- -\frac{\tau_2^2}{m}\bigcup_{i}{ \left[ \frac{ \partial\left(\mathbf{P}\right)}{\partial k_{i}}  \mathbb{X}(n-1,\mathbf{K})\right] }
- +\left(2 \mathbf{I} -\mathbf{P(\mathbf{K})}\frac{\tau_2^2}{m}\right) \mathbb{J}(n-1,\mathbf{K})
- -\mathbb{J}(n-2,\mathbf{K}),
+ \MATRIX{J}(n,\VECTOR{k}) = 
+ -\frac{\tau_2^2}{m}\bigcup_{i}{ \left[ \frac{ \partial\left(\MATRIX{P}\right)}{\partial k_{i}}  \VECTOR{X}(n-1,\VECTOR{k})\right] }
+ +\left(2 \mathbf{I} -\mathbf{P(\VECTOR{k})}\frac{\tau_2^2}{m}\right) \MATRIX{J}(n-1,\VECTOR{k})
+ -\MATRIX{J}(n-2,\VECTOR{k}),
 \end{equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
