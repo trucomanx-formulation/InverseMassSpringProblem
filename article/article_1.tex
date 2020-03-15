@@ -61,6 +61,11 @@
 \newcommand{\MATRIX}[1]{\mathbf{\uppercase{#1}}}
 \newcommand{\VECTOR}[1]{\mathbf{\lowercase{#1}}}
 
+
+%% diagonal function
+\newcommand{\funcdiag}{diag}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{titlesec}
 \titleformat{\section}
@@ -183,23 +188,24 @@ using the Eq. (\ref{eq:Xt}),
 \end{equation}
 or Eq. (\ref{eq:Xtalt})
 \begin{equation}\label{eq:Xtalt}
- \VECTOR{X}(t)= \MATRIX{V}\left( cos(\MATRIX{W}t)\VECTOR{d}_1 +  sin(\MATRIX{W}t)\VECTOR{d}_2 \right),
+ \VECTOR{X}(t)= \MATRIX{V}\left( \funcdiag(cos(\VECTOR{w}t))\VECTOR{d}_1 +  \funcdiag(sin(\VECTOR{w}t))\VECTOR{d}_2 \right),
 \end{equation}
 where, $\MATRIX{V}=\left(\VECTOR{e}_1,\VECTOR{e}_2, ..., \VECTOR{e}_M \right)$ and 
 $\mathbf{w}=\left( \sqrt{\lambda_1},\sqrt{\lambda_2},\dots ,\sqrt{\lambda_M}\right)^{T}$ 
 are a matrix and a column 
 vector conform using the eigenvectors $\VECTOR{e}_i$ and eigenvalues $\lambda_i$ of
-$\MATRIX{P}/m$, being $\MATRIX{W}$ a diagonal matrix conform with the elements of vector $\mathbf{w}$.
+$\MATRIX{P}/m$.
 By other side, $\MATRIX{D}_1$ and $\MATRIX{D}_2$ are two any constant diagonal matrices
 conform by the elements of column vectors $\VECTOR{d}_1$ and $\VECTOR{d}_2$ respectively.
 Thus, we now that $\dot{\VECTOR{X}}(t)$ and $\ddot{\VECTOR{X}}(t)$ are defined by the Eqs. (\ref{eq:dXt_dt})
 and (\ref{eq:d2Xt_dt2}) respectively.
 \begin{equation}\label{eq:dXt_dt}
- \dot{\VECTOR{X}}(t)= \MATRIX{V}\left(-\MATRIX{D}_1 \MATRIX{W} sin(\mathbf{w}t) + \MATRIX{D}_2 \MATRIX{W} cos(\mathbf{w}t) \right),
+ \dot{\VECTOR{X}}(t)= \MATRIX{V}\left(-\MATRIX{D}_1 \MATRIX{W} sin(\mathbf{w}t)) + \MATRIX{D}_2 \MATRIX{W} cos(\mathbf{w}t) \right),
 \end{equation}
 \begin{equation}\label{eq:d2Xt_dt2}
  \ddot{\VECTOR{X}}(t)= -\MATRIX{V}\left(\MATRIX{D}_1 \MATRIX{W}^2 cos(\mathbf{w}t) + \MATRIX{D}_2 \MATRIX{W}^2 sin(\mathbf{w}t) \right),
 \end{equation}
+being $\MATRIX{W}$ a diagonal matrix conform with the elements of vector $\mathbf{w}$;
 thus, It is fulfill that $\MATRIX{W}^2=(\MATRIX{V} \MATRIX{D}_1)^{-1}(\MATRIX{P}/m)(\MATRIX{V} \MATRIX{D}_1)=(\MATRIX{V} \MATRIX{D}_2)^{-1}(\MATRIX{P}/m)( \MATRIX{V} \MATRIX{D}_2)$.
 
 \subsubsection{Constant values from two points}
@@ -208,8 +214,8 @@ use the Eq. (\ref{eq:d1d2})
 \begin{equation}\label{eq:d1d2}
   \left( 
  \begin{matrix}
-\MATRIX{V}cos(\MATRIX{W}t_1) & \MATRIX{V}sin(\MATRIX{W}t_1)\\
-\MATRIX{V}cos(\MATRIX{W}t_2) & \MATRIX{V}sin(\MATRIX{W}t_2)\\
+\MATRIX{V}\funcdiag(cos(\VECTOR{w}t_1) & \MATRIX{V}\funcdiag(sin(\VECTOR{w}t_1))\\
+\MATRIX{V}\funcdiag(cos(\VECTOR{w}t_2)) & \MATRIX{V}\funcdiag(sin(\VECTOR{w}t_2))\\
  \end{matrix}
  \right)^{-1}
  \left( 
@@ -232,8 +238,8 @@ use the Eq. (\ref{eq:d1d22})
 \begin{equation}\label{eq:d1d22}
   \left( 
  \begin{matrix}
-\MATRIX{V}cos(\MATRIX{W}t_1) & \MATRIX{V}sin(\MATRIX{W}t_1)\\
--\MATRIX{V}\MATRIX{W}sin(\MATRIX{W}t_1) & \MATRIX{V}\MATRIX{W}cos(\MATRIX{W}t_1)\\
+\MATRIX{V}\funcdiag(cos(\VECTOR{w}t_1)) & \MATRIX{V}\funcdiag(sin(\VECTOR{w}t_1))\\
+-\MATRIX{V}\MATRIX{W}\funcdiag(sin(\VECTOR{w}t_1)) & \MATRIX{V}\MATRIX{W}\funcdiag(cos(\VECTOR{w}t_1))\\
  \end{matrix}
  \right)^{-1}
  \left( 
